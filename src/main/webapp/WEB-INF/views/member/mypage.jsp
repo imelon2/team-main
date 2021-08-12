@@ -11,7 +11,8 @@
 <html>
 <head>
 
-<link href="${appRoot }/resources/favicon/brand_logo.png" rel="shortcut icon" type="image/x-icon">
+<link href="${appRoot }/resources/favicon/brand_logo.png"
+	rel="shortcut icon" type="image/x-icon">
 
 <mem:mainpage></mem:mainpage>
 
@@ -46,16 +47,17 @@ body {
 
 
 
-
+     <!-- 로고 -->
 	<div class="container">
 		<div class="row justify-content-center">
-			<a href="${appRoot }/member/main"> <img style="padding: 70px;"id="logo" alt="jinah-logo"
+			<a href="${appRoot }/member/main"> <img style="padding: 70px;"
+				id="logo" alt="jinah-logo"
 				src="${appRoot }/resources/image/others/brand_logo_400px.png">
 			</a>
-		</div> 
+		</div>
 		<br> <br>
 
-		<!-- navbar 전에
+		<!-- navbar 전에 권한처리
  <ul class="nav justify-content-end">
   
   <sec:authorize access="isAnonymous()">
@@ -84,7 +86,7 @@ body {
  -->
 
 
-
+         <!-- 메뉴list -->
 		<div class="btn-group dropleft">
 			<button class="btn btn-info btn-lg dropdown-toggle" type="button"
 				id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
@@ -92,14 +94,16 @@ body {
 			<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 				<a class="dropdown-item" href="${appRoot }/member/myget">내 정보 확인</a>
 				<!--    <a class="dropdown-item" href="${appRoot }/member/subinfo">구독정보</a> -->
-				<a class="dropdown-item" href="${appRoot}/searchstore/searchMap">매장 찾기</a>
-				<a class="dropdown-item" href="${appRoot }/help/askList">나의 1:1문의내역</a> 
-				<a class="dropdown-item" href="${appRoot }/review/list">구독 리뷰</a> 
+				<a class="dropdown-item" href="${appRoot}/searchstore/searchMap">매장
+					찾기</a> <a class="dropdown-item" href="${appRoot }/help/askList">나의
+					1:1문의내역</a> <a class="dropdown-item" href="${appRoot }/review/list">구독
+					리뷰</a>
 				<sec:authorize access="hasAnyRole('ROLE_B2BUSER', 'ROLE_EMPUSER')">
-					<a class="dropdown-item" href="${appRoot }/searchstore/b2bIntroduceBoard">홍보페이지 관리</a> 
+					<a class="dropdown-item"
+						href="${appRoot }/searchstore/b2bIntroduceBoard">홍보페이지 관리</a>
 				</sec:authorize>
-					<a class="dropdown-item" href="${appRoot}/cancelSubs/cancelSubsBoard">구독
-					취소</a>
+				<a class="dropdown-item"
+					href="${appRoot}/cancelSubs/cancelSubsBoard">구독 취소</a>
 			</div>
 		</div>
 
@@ -107,109 +111,120 @@ body {
 
 		<!-- 구독 신청 버튼 권한 부여 + subsoptions정보 불러오기 -->
 		<script type="text/javascript">
-			$(function() {  
+			$(function() {
 				let loginID = "${pinfo.member.userid}";
 				$.ajax({
-							type : "POST",
-							url : "${appRoot}/member/getLoginInfo",  
-							data : {
-								userid : loginID 
-							},
-							success : function(data) {   
+					type : "POST",
+					url : "${appRoot}/member/getLoginInfo",
+					data : {
+						userid : loginID
+					},
+					success : function(data) {
 
-								let confirmID = data;
-								console.log(confirmID);
-								
-								if (data == '') {
-									$(".mypage-subinfo2").show(); 
-									$("#mypage-subinfo-2").show();
-									$("#mypage-subinfo-21").show();
-									
-								} else if (data != '') {
-									$.ajax ({               
-										type: "post",
-										url: "${appRoot}/member/getsubsoptions",
-										data: {
-											userid: loginID
-										},
-										success: function(data1) {
-											$("#sub-options").text(" " + data1 + " ");
-											console.log(data1);
-										},
-										error: function () {
-											console.log("구독자 불러오기 실패!");
-										}
-										
-									})
-									
-									$(".mypage-subinfo1").show();
-									$("#mypage-subinfo-1").show();
-									$("#mypage-subinfo-22").show(); 
-								} 
-							}, 
-							error : function() {
-								console.log("실패");
-							}
-						})
+						let confirmID = data;
+						console.log(confirmID);
+
+						if (data == '') {
+							$(".mypage-subinfo2").show();
+							$("#mypage-subinfo-2").show();
+							$("#mypage-subinfo-21").show();
+
+						} else if (data != '') {
+							$.ajax({
+								type : "post",
+								url : "${appRoot}/member/getsubsoptions",
+								data : {
+									userid : loginID
+								},
+								success : function(data1) {
+									$("#sub-options").text(" " + data1 + " ");
+									console.log(data1);
+								},
+								error : function() {
+									console.log("구독자 불러오기 실패!");
+								}
+
+							})
+
+							$(".mypage-subinfo1").show();
+							$("#mypage-subinfo-1").show();
+							$("#mypage-subinfo-22").show();
+						}
+					},
+					error : function() {
+						console.log("실패");
+					}
+				})
 			})
 		</script>
 
 
+        <!-- 내정보,이름,구독종류 -->
 		<div class="jumbotron">
 			<h1 class="display-4">안녕하세요 ${member.userName } 회원님</h1>
-				<br>
-				
-				<sec:authorize access="hasRole('ROLE_USER')">
-				<div style="display:none;" class="mypage-subinfo1">고객님이 이용중인 서비스는<span style="font-size: 30px; color: #0583F2;"id="sub-options"></span>입니다.</div>
-				<div style="display:none;" class="mypage-subinfo2">혹시 아직 서비스를 이용하지 않고
-					계신가요~? <br> 서둘러 밑에 구독하기 버튼을 눌러주세요!</div>
-			<hr class="my-4">
- 
-            
-			<div class="row">
-				<div class="col-sm-6">
-					<div class="card"> 
-					
-						<div class="card-body" style="display:none;" id="mypage-subinfo-21">
-							<h5 class="card-title">싱글 구독</h5>
-							<p class="card-text">혼자 사는 싱글들을 위한 맞춤형 구독</p>
-							<a href="${appRoot }/subscribe/subsregister" class="btn btn-info">1인
-								가구 구독</a>
-						</div> 
-						<div class="card-body" style="display:none;" id="mypage-subinfo-22">
-							<h5 class="card-title">${member.userName }님 구독 완료</h5>
-							<p class="card-text"></p>
-							<a href="" class="btn btn-info"><i class="fas fa-hand-sparkles"></i>
-								</a>
-						</div>
-						
-						 
-					</div>  
+			<br>
+
+			<sec:authorize access="hasRole('ROLE_USER')">
+				<div style="display: none;" class="mypage-subinfo1">
+					고객님이 이용중인 서비스는<span style="font-size: 30px; color: #0583F2;"
+						id="sub-options"></span>입니다.
 				</div>
-				<div class="col-sm-6">
-					<div class="card">
-					
-						<div class="card-body" style="display:none;" id="mypage-subinfo-2">
-							<h5 class="card-title">대형 구독</h5>
-							<p class="card-text">가족 구성원들과 함께 이용하는 구독 서비스</p>
-							<a href="${appRoot }/subscribe/subsregister" class="btn btn-info">다세대
-								가구 구독</a>
-						</div> 
-						  
-						<div class="card-body" style="display:none;" id="mypage-subinfo-1"> 
-							<h5 class="card-title">${member.userName }님 구독 정보</h5> 
-							<p class="card-text"></p>  
-							<a href="${appRoot }/subscribe/finalinfo" class="btn btn-info"> 
-								<i class="fas fa-info"></i></a>   
-						</div> 
-						
+				<div style="display: none;" class="mypage-subinfo2">
+					혹시 아직 서비스를 이용하지 않고 계신가요~? <br> 서둘러 밑에 구독하기 버튼을 눌러주세요!
+				</div>
+				<hr class="my-4">
+
+
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="card">
+
+							<div class="card-body" style="display: none;"
+								id="mypage-subinfo-21">
+								<h5 class="card-title">싱글 구독</h5>
+								<p class="card-text">혼자 사는 싱글들을 위한 맞춤형 구독</p>
+								<a href="${appRoot }/subscribe/subsregister"
+									class="btn btn-info">1인 가구 구독</a>
+							</div>
+							<div class="card-body" style="display: none;"
+								id="mypage-subinfo-22">
+								<h5 class="card-title">${member.userName }님구독 완료</h5>
+								<p class="card-text"></p>
+								<a href="" class="btn btn-info"><i
+									class="fas fa-hand-sparkles"></i> </a>
+							</div>
+
+
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="card">
+
+							<div class="card-body" style="display: none;"
+								id="mypage-subinfo-2">
+								<h5 class="card-title">대형 구독</h5>
+								<p class="card-text">가족 구성원들과 함께 이용하는 구독 서비스</p>
+								<a href="${appRoot }/subscribe/subsregister"
+									class="btn btn-info">다세대 가구 구독</a>
+							</div>
+
+							<div class="card-body" style="display: none;"
+								id="mypage-subinfo-1">
+								<h5 class="card-title">${member.userName }님구독 정보</h5>
+								<p class="card-text"></p>
+								<a href="${appRoot }/subscribe/finalinfo" class="btn btn-info">
+									<i class="fas fa-info"></i>
+								</a>
+							</div>
+
+						</div>
 					</div>
 				</div>
-			</div>
 			</sec:authorize>
 
 		</div>
 
+         <!-- 페이지 밑에 nav알림 -->
 		<bot:botnav></bot:botnav>
 
 	</div>
