@@ -229,6 +229,7 @@ li {
 	font-size: 22px;
 	line-height: 2;
 }
+
 </style>
 <!-- script src="${appRoot }/resources/js/subscribe/subscribe-calendar.js" -->
 </head>
