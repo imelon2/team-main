@@ -106,14 +106,23 @@
 			url : "${appRoot}/review/getaddress2",
 			data : data,
 			success : function(data) {
-				console.log(data);
-				if (data != "") {
-					console.log(data);
+				console.log(idVal);
+				if (idVal != "") {
+					console.log(idVal);
 					console.log("구독중");
 					$("#re-input4").val(data.storename);
 					$("#re-input5").val(data.storeaddress);
+					
+					// 운영자 글 작성 시 적용 사항
+					if (idVal == 'admin') {
+						console.log(idVal);
+						$("#re-input4").attr("hidden", "hidden");
+						$("#re-input5").attr("hidden", "hidden");
+						$("#reinput-label4").attr("hidden", "hidden");
+						$("#reinput-label5").attr("hidden", "hidden");
+					}
 
-				} else if (data == "") {
+				} else if (idVal == "") {
 					console.log("구독중 아님");
 					$("#re-input4").val("구독중이 아닙니다.");
 					$("#re-input5").val("구독중이 아닙니다.");
@@ -226,11 +235,11 @@
 
 					<!-- 이용한 세탁소 위치 정보 -->
 	               <div class="item form-group">
-	                  <label for="re-input4">나의 구독 세탁소 이름</label> <input id="re-input4"
+	                  <label id="reinput-label4" for="re-input4">나의 구독 세탁소 이름</label> <input id="re-input4"
 	                     class="form-control" value="" name="storeName" readonly>
 	               </div>
 	               <div class="item form-group">
-	                  <label for="re-input5">나의 구독 세탁소 주소</label> <input id="re-input5"
+	                  <label id="reinput-label5" for="re-input5">나의 구독 세탁소 주소</label> <input id="re-input5"
                      class="form-control" value="" name="storeAddress" readonly>
 					</div>
 					<input class="write-btn btn btn-primary btn-lg" id="write-submit" type="submit"

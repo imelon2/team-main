@@ -88,6 +88,37 @@
 
 </style>
 
+<!-- 구독자 이용 세탁소 정보 JS -->
+<script type="text/javascript">
+	$(function() {
+
+		var reWriter = $("#re-input3").val();
+		var reBno = ${review.reBno};
+		
+		$.ajax({
+			type : "get",
+			url : "${appRoot}/review/get?reBno=" + reBno,
+			success : function() {
+				console.log(reWriter);
+					
+					// 운영자 글 작성 시 적용 사항
+					if (reWriter == "운영자") {
+						console.log(reWriter);
+						$("#re-input4").attr("hidden", "hidden");
+						$("#re-input5").attr("hidden", "hidden");
+						$("#reinput-label4").attr("hidden", "hidden");
+						$("#reinput-label5").attr("hidden", "hidden");
+						$("#review-star-parent").css("display", "none");
+						$("#review-star-result").css("display", "none");
+					}
+			},
+			error : function() {
+				console.log("Failed : error with getting information for 'ADMIN' ");
+			}
+		});
+	});
+</script>
+
 <script>
 	const appRoot = "${appRoot}";
 	// const reBno = "${review.reBno}"
@@ -188,11 +219,11 @@
 						
 						<!-- 이용한 세탁소 위치 정보 -->
 						<div class="item form-group">
-							<label for="re-input4"><span>${review.reWriterName }</span>님의 구독 세탁소 이름</label> <input id="re-input4"
+							<label id="reinput-label4" for="re-input4"><span>${review.reWriterName }</span>님의 구독 세탁소 이름</label> <input id="re-input4"
 								class="form-control" value="${review.storeName }" readonly>
 						</div>
 						<div class="item form-group">
-							<label for="re-input5"><span>${review.reWriterName }</span>님의 구독 세탁소 주소</label> <input id="re-input5"
+							<label id="reinput-label5" for="re-input5"><span>${review.reWriterName }</span>님의 구독 세탁소 주소</label> <input id="re-input5"
 								class="form-control" value="${review.storeAddress }" readonly>
 						</div>
 
