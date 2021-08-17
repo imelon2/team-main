@@ -7,14 +7,14 @@
 <%@ taglib prefix="mem" tagdir="/WEB-INF/tags/member"%>
 <%@ taglib prefix="bot" tagdir="/WEB-INF/tags/botnav"%>
 
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html>
 <head>
-    <!-- 로고 -->
+<!-- 로고 -->
 <link href="${appRoot }/resources/favicon/brand_logo.png"
 	rel="shortcut icon" type="image/x-icon">
-	
-     <!-- navbar -->
+
+<!-- navbar -->
 <mem:mainpage></mem:mainpage>
 <br>
 <br>
@@ -48,84 +48,75 @@ body {
 
 
 
-<<<<<<< HEAD
-</head>
-<body>
-=======
-</head> 
-<body style="overflow-x: hidden;">
->>>>>>> branch 'master' of https://github.com/kimseunggwon/team-main.git
+
+<script>
+	
+</script>
 
 
+<!-- 로그인한 내정보들 -->
+<div class="container">
 
-	<script>
-		
-	</script>
+	<div class="col align-self-center mt-3">
+		<a href="${appRoot }/member/main"> <img
+			src="${appRoot }/resources/image/others/brand_logo_300px.png"
+			alt="...">
+		</a>
+	</div>
+	<br> <br> <br>
+	<h1>
+		<span class="badge badge-info">실버</span> ${member.userName }님 안녕하세요!
+	</h1>
+	<div class="jumbotron jumbotron-fluid">
+		<section id="container">
+			<form id="member-form" action="${appRoot }/member/modify"
+				method="post">
+				<div class="form-group has-feedback">
+					<label class="control-label" for="userName">나의 이름</label> <input
+						value="${member.userName }" class="form-control" readonly
+						type="text" id="userName" name="userName" />
+				</div>
+				<br>
+				<div class="form-group has-feedback">
+					<label class="control-label" for="userId">나의 아이디</label> <input
+						class="form-control" value="${member.userid}" readonly type="text"
+						id="userId" name="userid" />
+				</div>
+				<br>
+				<div class="form-group has-feedback">
+					<label class="control-label" for="userEmail">나의 이메일주소</label> <input
+						value="${member.userEmail}" class="form-control" readonly
+						type="text" id="userEmail" name="userEmail" />
+				</div>
+				<br>
+				<div class="form-group has-feedback">
+					<label class="control-label" for="userPhonenum">나의 핸드폰번호</label> <input
+						value="${member.userPhonenum}" class="form-control" readonly
+						type="text" id="userPhonenum" name="userPhonenum" />
+				</div>
+				<br>
+				<div class="form-group">
+					<label class="control-label" for="userAddress">나의 주소</label> <input
+						value="${member.userAddress}" class="form-control" readonly
+						type="text" id="userAddress" name="userAddress" />
+				</div>
+	</div>
 
-
-     <!-- 로그인한 내정보들 -->
-	<div class="container">
-
-		<div class="col align-self-center mt-3">
-			<a href="${appRoot }/member/main"> <img
-				src="${appRoot }/resources/image/others/brand_logo_300px.png"
-				alt="...">
-			</a>
-		</div>
-		<br> <br> <br>
-		<h1>
-			<span class="badge badge-info">실버</span> ${member.userName }님 안녕하세요!
-		</h1>
-		<div class="jumbotron jumbotron-fluid">
-			<section id="container">
-				<form id="member-form" action="${appRoot }/member/modify"
-					method="post">
-					<div class="form-group has-feedback">
-						<label class="control-label" for="userName">나의 이름</label> <input
-							value="${member.userName }" class="form-control" readonly
-							type="text" id="userName" name="userName" />
-					</div>
-					<br>
-					<div class="form-group has-feedback">
-						<label class="control-label" for="userId">나의 아이디</label> <input
-							class="form-control" value="${member.userid}" readonly
-							type="text" id="userId" name="userid" />
-					</div>
-					<br>
-					<div class="form-group has-feedback">
-						<label class="control-label" for="userEmail">나의 이메일주소</label> <input
-							value="${member.userEmail}" class="form-control" readonly
-							type="text" id="userEmail" name="userEmail" />
-					</div>
-					<br>
-					<div class="form-group has-feedback">
-						<label class="control-label" for="userPhonenum">나의 핸드폰번호</label> <input
-							value="${member.userPhonenum}" class="form-control" readonly
-							type="text" id="userPhonenum" name="userPhonenum" />
-					</div>
-					<br>
-					<div class="form-group">
-						<label class="control-label" for="userAddress">나의 주소</label> <input
-							value="${member.userAddress}" class="form-control" readonly
-							type="text" id="userAddress" name="userAddress" />
-					</div>
-		</div>
-
-		<!-- 수정 버튼 -->
-		<div class="col-sm-12" style="text-align: center;">
-			<a href="myinfo" type="submit" class="btn btn-primary btn-lg">내
-				정보 수정하기</a>
-		</div>
+	<!-- 수정 버튼 -->
+	<div class="col-sm-12" style="text-align: center;">
+		<a href="myinfo" type="submit" class="btn btn-primary btn-lg">내 정보
+			수정하기</a>
+	</div>
 
 
-		</form>
-		</section>
-</body>
+	</form>
+	</section>
+	</body>
 
 
 </div>
 
-  <!--  modal창 기능 보류
+<!--  modal창 기능 보류
   
 <div id="myModal" class="modal" tabindex="-1">
 	<div class="modal-dialog">
@@ -148,11 +139,10 @@ body {
 		</div>
 	</div>
 </div> 
---> 
+-->
 <!-- 밑에 navbar -->
-  
-<bot:botnav></bot:botnav>
 
+<bot:botnav></bot:botnav>
 </body>
 </html>
 
